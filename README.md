@@ -1,50 +1,28 @@
-# Welcome to your Expo app 👋
-
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
-
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Hey everyone 👋
+I’m using Expo Router in a React Native app, and I’ve hit a weird navigation issue that I can’t seem to figure out.
+Here’s my folder structure:
+app/
+├── _layout.tsx
+├── index.tsx
+└── profile/
+    ├── _layout.tsx
+    ├── index.tsx
+    └── detail/
+        └── [id].tsx
+What’s happening:
+I have a tab bar with two main tabs:
+index.tsx (Home)
+profile/ (which is a stack: profile/index → profile/detail/[id])
+When I open the app and navigate to the Profile tab first, then go from profile/index → profile/detail/[id], everything works fine. I can go back normally using the default header back button.
+I also have a quick action button on the Home tab that takes me directly to a specific detail page (like /profile/detail/123). If I’ve already visited the Profile stack once before, the back button still works and takes me back to profile/index.
+The problem:
+If I open the app for the first time and go directly to /profile/detail/[id] from the quick action (without visiting the profile tab first),
+→ I get to the detail page, but
+🚫 there’s no back button
+🚫 I can’t navigate back to profile/index
+It feels like Expo Router is treating the detail page as the root of the profile stack in that case.
+My question:
+Is there a way to ensure that the stack always treats profile/index as the root, even when I deep-link directly to a nested route like /profile/detail/[id]?
+Basically, I want the back navigation to always work as if I came from profile/index, even if I entered the detail route directly.
+Any idea how to handle this properly with Expo Router?
+Thanks in advance 🙏
